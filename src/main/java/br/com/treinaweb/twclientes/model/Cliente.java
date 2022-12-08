@@ -1,9 +1,13 @@
 package br.com.treinaweb.twclientes.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
+@Table
 public class Cliente {
 
     @Id
@@ -13,11 +17,20 @@ public class Cliente {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+
+    @Column(nullable = false, name = "data_nascimento")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dataNascimento;
 
     @Column(nullable = false)
-    private LocalDate dataNascimento;
+    private String profissao;
+
+
+    public Cliente(String nome, LocalDate dataNascimento, String profissao) {
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.profissao = profissao;
+    }
 
     public Cliente() {}
 
@@ -37,13 +50,6 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
@@ -53,35 +59,35 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Cliente other = (Cliente) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return id.equals(cliente.id) && nome.equals(cliente.nome)  && dataNascimento.equals(cliente.dataNascimento) && profissao.equals(cliente.profissao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, dataNascimento, profissao);
     }
 
     @Override
     public String toString() {
-        return "Cliente [id=" + id + ", nome=" + nome + "]";
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", profissao='" + profissao + '\'' +
+                '}';
     }
-
 }
 
