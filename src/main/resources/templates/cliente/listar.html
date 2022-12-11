@@ -26,7 +26,12 @@
 
   <div class="row">
     <div class="col-sm-12">
-      <table class="table">
+
+      <div th:if="${#lists.isEmpty(clientes)}" class="alert alert-danger" role="alert">
+        Não há clientes cadastrados no momento!
+      </div>
+
+      <table class="table" th:unless="${#lists.isEmpty(clientes)}">
         <thead>
           <tr>
             <th scope="col">ID</th>

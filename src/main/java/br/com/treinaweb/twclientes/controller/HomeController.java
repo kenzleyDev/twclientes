@@ -25,6 +25,7 @@ public class HomeController {
         aulas.add("Javascript");
         aulas.add("HTML");
         aulas.add("CSS");
+        aulas.add("Python");
 
         model.addAttribute("aulas", aulas);
 
