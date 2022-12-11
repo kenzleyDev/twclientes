@@ -9,12 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
+    public String home(ModelMap model) {
+        model.addAttribute("boasVindas", "Bem Vindo ao curso de Spring com Thymeleaf");
+
+        List<String> aulas = new ArrayList<>();
+        aulas.add("Java");
+        aulas.add("Javascript");
+        aulas.add("HTML");
+        aulas.add("CSS");
+
+        model.addAttribute("aulas", aulas);
+
         return "home";
     }
 
