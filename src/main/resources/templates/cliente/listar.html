@@ -2,32 +2,32 @@
 <html th:replace="~{layout :: layout (~{::title}, ~{::main})}" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
-  <title>Spring Fundamentos - Listagem de Clientes</title>
+  <title th:text="#{listar.title}"></title>
 </head>
 <body>
 
 <main class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Listagem de Clientes</h1>
+      <h1 th:text="#{listar.header}"></h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12">
 
-      <div th:if="${#lists.isEmpty(clientes)}" class="alert alert-danger" role="alert">
-        Não há clientes cadastrados no momento!
+      <div th:if="${#lists.isEmpty(clientes)}" th:text="#{listar.table.vazia}" class="alert alert-danger" role="alert">
+        
       </div>
 
       <table class="table" th:unless="${#lists.isEmpty(clientes)}">
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Data de Nascimento</th>
-            <th scope="col">Profissão</th>
-            <th scope="col">Ações</th>
+            <th th:text="#{listar.table.col.id}" scope="col"></th>
+            <th th:text="#{listar.table.col.nome}"scope="col"></th>
+            <th th:text="#{listar.table.col.dataNascimento}"scope="col"></th>
+            <th th:text="#{listar.table.col.profissao}" scope="col"></th>
+            <th th:text="#{listar.table.col.acoes}" scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -47,18 +47,20 @@
 
             <td th:text="${cliente.profissao}"></td>
             <td>
-              <a 
+              <a
               th:href="@{/cliente/{id}/editar (id=${cliente.id})}" 
-              class="btn btn-warning">
-              Editar
+              class="btn btn-warning"
+              th:text="#{listar.table.acao.editar}">
+              
             </a>
 
               <a 
               th:href="@{/cliente/{id}/excluir (id=${cliente.id})}" 
               class="btn btn-danger"
-              onclick="return confirm('Tem certeza que deseja excluir o cliente?');">
+              onclick="return confirm('Tem certeza que deseja excluir o cliente?');"
+              th:text="#{listar.table.acao.excluir}">
               
-              Excluir
+              
             </a>
             </td>
           </tr>
