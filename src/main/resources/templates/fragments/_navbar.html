@@ -1,5 +1,15 @@
 <nav th:fragment="nav" class="navbar bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">TW - CLIENTES</a>
+
+        <form class="d-flex">
+            <select class="form-select me-2" name="lang">
+                <option selected disabled>Selecione o idioma</option>
+                <option value="pt">Português</option>
+                <option value="en">Inglês</option>
+            </select>
+
+            <button class="btn btn-outline-success" type="submit">Ok</button>
+        </form>
     </div>
 </nav>
